@@ -1,0 +1,9 @@
+---
+- name: Listando usuarios en el sistema
+  shell: echo $(grep 'sh$' /etc/passwd | awk {'print $1'} FS=':')
+  register: usuarios
+
+- name: debug
+  debug:
+    var: usuarios.stdout_lines
+      

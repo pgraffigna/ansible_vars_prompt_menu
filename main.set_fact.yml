@@ -1,0 +1,42 @@
+---
+- hosts: localhost
+  become: yes
+  connection: local
+  gather_facts: no
+  
+  vars_prompt:
+  - name: server_type
+    prompt: | 
+      Elegi que tipo de servidor instalar
+      1- Oracle
+      2- ColdFusion
+      3- IIS
+      4- Tomcat
+      5- File Server
+      6- Base Server
+    private: no
+
+  tasks:  
+    - set_fact: app=Oracle
+      when: ( server_type == "1" )
+  
+    - set_fact: app=ColdFusion
+      when: ( server_type == "2" )
+    
+    - set_fact: app=IIS
+      when: ( server_type == "3" )
+    
+    - set_fact: app=Tomcat
+      when: ( server_type == "4" )
+
+    - set_fact: app=File Server
+      when: ( server_type == "5" )
+
+    - set_fact: app=Base Server
+      when: ( server_type == "6" )  
+    
+    - name: debug
+      debug:
+        msg: "Elegiste {{ app }}" 
+
+  

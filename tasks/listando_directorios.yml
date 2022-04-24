@@ -1,0 +1,10 @@
+---
+- name: Listando directorios
+  shell: ls -la
+  register: directorios
+
+- name: debug
+  debug:
+    var: directorios.stdout_lines     
+    
+  

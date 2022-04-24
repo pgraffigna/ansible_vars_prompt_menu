@@ -1,0 +1,27 @@
+---
+- hosts: localhost
+  become: yes
+  connection: local
+  gather_facts: no
+  
+  vars_prompt:
+  - name: opciones
+    prompt: | 
+      Elegi tu opcion:
+      1- Crear contraseña
+      2- Listar usuarios
+      3- Listar directorios
+    private: no
+
+  tasks:
+    - include_tasks: tasks/crear_contraseña.yml  
+      when: ( opciones == "1" )
+
+    - include_tasks: tasks/listando_usuarios.yml
+      when: ( opciones == "2" )
+
+    - include_tasks: tasks/listando_directorios.yml
+      when: ( opciones == "3" )
+
+    
+  

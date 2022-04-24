@@ -1,0 +1,8 @@
+---
+- name: Creando la contraseña
+  shell: pwgen -1 -c 9 -n 1 -s | while IFS= read -r i; do printf '%s\n' "$i"1; done
+  register: contrasena
+  
+- name: 
+  debug:
+    msg: "La contraseña es {{ contrasena.stdout }}"  
